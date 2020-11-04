@@ -1,0 +1,10 @@
+export { default as DashboardView } from "./Dashboard";
+export { default as ForgotPasswordView } from "./ForgotPassword";
+export { default as LandingView } from "./Landing";
+export { default as ResetPasswordView } from "./ResetPassword";
+export { default as SettingsView } from "./Settings";
+export { default as LoginView } from "./Login";
+export { default as RegisterView } from "./Register";
+export { default as TrackerView } from "./Tracker";
+export { default as VerifyView } from "./Verify";
+export { default as CheckAuthView } from "./CheckAuth";
