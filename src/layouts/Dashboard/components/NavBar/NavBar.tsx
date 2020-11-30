@@ -34,24 +34,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   content: {
     padding: theme.spacing(2),
   },
-  profile: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    minHeight: "fit-content",
-  },
-  avatar: {
-    width: 60,
-    height: 60,
-  },
-  name: {
-    marginTop: theme.spacing(1),
-  },
-  divider: {
-    marginTop: theme.spacing(2),
-  },
   navigation: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(1),
   },
   mobileDrawer: {
     width: 256,
@@ -84,22 +68,6 @@ const NavBar: React.FC<NavBarProps> = ({
 
   const navbarContent = (
     <div className={classes.content}>
-      <div className={classes.profile}>
-        <Avatar
-          alt="Person"
-          className={classes.avatar}
-          src={profileImage}
-          component={RouterLink}
-          to="/dashboard/profile"
-        />
-        <Typography color="textPrimary" variant="h4" className={classes.name}>
-          {name}
-        </Typography>
-        <Typography color="textSecondary" variant="body2">
-          {email}
-        </Typography>
-      </div>
-      <Divider className={classes.divider} />
       <nav className={classes.navigation}>
         <List>
           {navigationConfig.map((item) => (
@@ -144,9 +112,9 @@ const NavBar: React.FC<NavBarProps> = ({
 
 const mapStateToProps = (state: any) => {
   return {
-    name: get(state, "auth.user.user.name", null),
-    profileImage: get(state, "auth.user.user.profilePicture", null),
-    email: get(state, "auth.user.user.email", null),
+    name: get(state, "auth.user.name", null),
+    profileImage: get(state, "auth.user.profilePicture", null),
+    email: get(state, "auth.user.email", null),
   };
 };
 

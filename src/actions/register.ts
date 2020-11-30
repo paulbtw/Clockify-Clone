@@ -9,8 +9,7 @@ export const register = (email: string, password: string, policy: boolean) => {
     const promise = requestApi("/auth/", "POST", body);
     promise
       .then((user) => {
-        console.log(user);
-        dispatch(actionSuccess(types.REGISTER, { user: user }));
+        dispatch(actionSuccess(types.REGISTER));
       })
       .catch((err) => {
         let errorMessage: string;

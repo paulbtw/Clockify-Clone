@@ -1,25 +1,15 @@
 import { Table, TableBody, TableHead, TableRow } from "@material-ui/core";
 import React, { useEffect } from "react";
-import { AnyKindOfDictionary, get } from "lodash";
+import { get } from "lodash";
 import { fetchList } from "../../../../actions/timeEntries";
 import { connect } from "react-redux";
 import { TimeEntryListItemContainer } from "..";
+import { groupByDay } from "../../../../utils/timeEntries";
+import { timeEntriesInterface } from "../../../../types/timeEntries";
 
 interface TimeEntryListItemsByDayProps {
   date: string;
-  entries: {
-    id: string;
-    description: string;
-    billable: boolean;
-    start: string;
-    end: string | null;
-    duration: number | null;
-    isLocked: boolean;
-    userId: string;
-    workspaceId: string;
-    projectId: string | null;
-    tagId: string | null;
-  }[];
+  entries: timeEntriesInterface[];
 }
 
 export const TimeEntryListItemsByDay: React.FC<TimeEntryListItemsByDayProps> = ({
@@ -29,21 +19,12 @@ export const TimeEntryListItemsByDay: React.FC<TimeEntryListItemsByDayProps> = (
   return (
     <Table>
       <TableHead>
-        <TableRow>
-          <TableRow>{date}</TableRow>
-        </TableRow>
+        <TableRow>{date}</TableRow>
       </TableHead>
       <TableBody>
         {entries.map((timeEntry) => {
           return (
-            <TimeEntryListItemContainer
-              key={timeEntry.id}
-              text={timeEntry.description}
-              id={timeEntry.id}
-              startTime={timeEntry.start}
-              endTime={timeEntry.end}
-              tagId={timeEntry.tagId}
-            />
+            <TimeEntryListItemContainer key={timeEntry.id} entry={timeEntry} />
           );
         })}
       </TableBody>
@@ -54,19 +35,7 @@ export const TimeEntryListItemsByDay: React.FC<TimeEntryListItemsByDayProps> = (
 interface TimeEntryListContainerProps {
   onFetchList: (workspaceId: string) => void;
   workspaceId: string;
-  timeEntries: {
-    id: string;
-    description: string;
-    billable: boolean;
-    start: string;
-    end: string | null;
-    duration: number | null;
-    isLocked: boolean;
-    userId: string;
-    workspaceId: string;
-    projectId: string | null;
-    tagId: string | null;
-  }[];
+  timeEntries: timeEntriesInterface[];
 }
 
 const TimeEntryListContainer: React.FC<TimeEntryListContainerProps> = ({
@@ -78,22 +47,25 @@ const TimeEntryListContainer: React.FC<TimeEntryListContainerProps> = ({
     onFetchList(workspaceId);
   }, [workspaceId]);
 
+  const entriesByDay = groupByDay(timeEntries);
   return (
     <div>
-      <TimeEntryListItemsByDay
-        key="03/11/2020"
-        date="03/11/2020"
-        entries={timeEntries}
-      />
+      {entriesByDay.map((e) => (
+        <TimeEntryListItemsByDay
+          key={e.date}
+          date={e.date}
+          entries={e.entries}
+        />
+      ))}
     </div>
   );
 };
 
 const mapStateToProps = (state: any) => {
   return {
-    workspaceId: get(state, "auth.user.user.activeWorkspace", null),
+    workspaceId: get(state, "auth.user.activeWorkspace", null),
     timeEntries: get(state, "timeEntries.entries", []),
-    userId: get(state, "auth.user.user.id", null),
+    userId: get(state, "auth.user.id", null),
   };
 };
 

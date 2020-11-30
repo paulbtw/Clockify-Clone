@@ -52,6 +52,7 @@ export const Navigation: React.FC<NavigationProps> = ({
         activeClassName={classes.active}
         className={classes.button}
         component={RouterLink}
+        exact={true}
         to={href}
       >
         {Icon && <Icon className={classes.icon} size="20" />}

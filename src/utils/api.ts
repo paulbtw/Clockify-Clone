@@ -13,7 +13,6 @@ export const requestApi = async (
 
   headers = Object.assign(
     {
-      "x-auth-token": localStorage.token || null,
       "Content-Type": "application/json",
     },
     headers
@@ -25,8 +24,8 @@ export const requestApi = async (
     cache: "no-cache",
     headers,
     body: data ? JSON.stringify(data) : null,
+    credentials: "include",
   });
-
   if (response.status < 200 || response.status >= 300) {
     const error = await response.json();
     throw new Error(error.message);

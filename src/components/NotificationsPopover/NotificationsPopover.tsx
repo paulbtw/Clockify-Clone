@@ -44,7 +44,7 @@ const NotificationsPopover: React.FC<NotificationsPopoverProps> = ({
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: "bottom",
-        horizontal: "center",
+        horizontal: "left",
       }}
       open={open}
       onClose={onClose}

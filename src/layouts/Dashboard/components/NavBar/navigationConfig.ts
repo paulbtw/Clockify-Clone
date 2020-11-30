@@ -1,13 +1,16 @@
-import {
-  BarChart as BarChartIcon,
-  Clock as ClockIcon,
-  Settings as SettingsIcon,
-} from "react-feather";
+import BarChartIcon from "@material-ui/icons/BarChart";
+import ScheduleIcon from "@material-ui/icons/Schedule";
+import BorderAllIcon from "@material-ui/icons/BorderAll";
+import SettingsIcon from "@material-ui/icons/Settings";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import GroupIcon from "@material-ui/icons/Group";
+import MoodIcon from "@material-ui/icons/Mood";
+import TurnedInNotIcon from "@material-ui/icons/TurnedInNot";
 
 export default [
   {
     href: "/dashboard/tracker",
-    icon: ClockIcon,
+    icon: ScheduleIcon,
     title: "Timer",
   },
   {
@@ -16,9 +19,29 @@ export default [
     title: "Reports",
   },
   {
-    href: "/dashboard/home",
-    icon: BarChartIcon,
+    href: "/dashboard",
+    icon: BorderAllIcon,
     title: "Dashboard",
+  },
+  {
+    href: "/dashboard/projects",
+    icon: LibraryBooksIcon,
+    title: "Projects",
+  },
+  {
+    href: "/dashboard/teams",
+    icon: GroupIcon,
+    title: "Teams",
+  },
+  {
+    href: "/dashboard/clients",
+    icon: MoodIcon,
+    title: "Clients",
+  },
+  {
+    href: "/dashboard/tags",
+    icon: TurnedInNotIcon,
+    title: "Tags",
   },
   {
     href: "/dashboard/settings",

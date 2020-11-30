@@ -8,13 +8,16 @@ export const isLoggedIn = () => {
     dispatch(actionStart(types.IS_LOGGED_IN));
 
     return new Promise(async (resolve, reject) => {
-      const response = await requestApi("/auth/verify", "POST");
-      if (response.success) {
-        dispatch(actionSuccess(types.IS_LOGGED_IN, { user: response.success }));
+      try {
+        const response = await requestApi("/users", "GET");
+        if (response.success) {
+          dispatch(actionSuccess(types.IS_LOGGED_IN, { user: response.user }));
+        } else {
+          dispatch(actionFailed(types.IS_LOGGED_IN));
+        }
         resolve();
-      } else {
+      } catch (err) {
         dispatch(actionFailed(types.IS_LOGGED_IN));
-        resolve();
       }
     });
   };

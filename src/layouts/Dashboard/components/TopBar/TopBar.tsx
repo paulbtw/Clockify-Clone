@@ -7,22 +7,39 @@ import {
   Toolbar,
   Hidden,
   Box,
+  Select,
+  FormControl,
+  MenuItem,
+  Button,
 } from "@material-ui/core";
 import clsx from "clsx";
-import { Link as RouterLink } from "react-router-dom";
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
 import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import MenuIcon from "@material-ui/icons/Menu";
 import InputIcon from "@material-ui/icons/Input";
-import { NotificationsPopover } from "../../../../components";
+import {
+  AccountPopover,
+  NotificationsPopover,
+  WorkspacePopover,
+} from "../../../../components";
 import { connect } from "react-redux";
 import { logout } from "../../../../actions/logout";
+import { get } from "lodash";
+import { IWorkspace } from "../../../../constants/WorkspaceTypes";
+import {
+  INotificationInvite,
+  INotificationMessage,
+} from "../../../../constants/NotificationTypes";
 
 interface TopBarProps {
   onMobileNavOpen: () => void;
   className?: string;
   onLogout?: () => void;
+  defaultWorkspace: IWorkspace;
+  workspaces: IWorkspace[];
+  notifications: (INotificationInvite | INotificationMessage)[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -36,11 +53,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 const TopBar: React.FC<TopBarProps> = ({
   onMobileNavOpen,
   className,
-  onLogout,
+  defaultWorkspace,
+  workspaces,
+  notifications,
 }) => {
   const classes = useStyles();
 
-  const [notifications, setNotifications] = useState([]);
   const [openNotifications, setOpenNotifications] = useState(false);
   const notificationsRef = useRef(null);
 
@@ -52,12 +70,43 @@ const TopBar: React.FC<TopBarProps> = ({
     setOpenNotifications(false);
   };
 
+  const [openAccount, setOpenAccount] = useState(false);
+  const accountRef = useRef(null);
+
+  const handleAccountOpen = () => {
+    setOpenAccount(true);
+  };
+
+  const handleAccountClose = () => {
+    setOpenAccount(false);
+  };
+
+  const [openWorkspace, setOpenWorkspace] = useState(false);
+  const workspaceRef = useRef(null);
+
+  const handleWorkspaceOpen = () => {
+    setOpenWorkspace(true);
+  };
+
+  const handleWorkspaceClose = () => {
+    setOpenWorkspace(false);
+  };
+
   return (
     <AppBar className={clsx(classes.root, className)} elevation={0}>
       <Toolbar>
-        <RouterLink to="/">Home</RouterLink>
         <Box flexGrow={1} />
         <Hidden mdDown>
+          {defaultWorkspace && workspaces.length > 0 ? (
+            <Button
+              color="inherit"
+              onClick={handleWorkspaceOpen}
+              ref={workspaceRef}
+            >
+              {defaultWorkspace.name}
+            </Button>
+          ) : null}
+
           <IconButton
             color="inherit"
             ref={notificationsRef}
@@ -71,8 +120,12 @@ const TopBar: React.FC<TopBarProps> = ({
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton color="inherit" onClick={onLogout}>
-            <InputIcon />
+          <IconButton
+            color="inherit"
+            ref={accountRef}
+            onClick={handleAccountOpen}
+          >
+            <AccountCircleIcon />
           </IconButton>
         </Hidden>
         <Hidden lgUp>
@@ -87,14 +140,32 @@ const TopBar: React.FC<TopBarProps> = ({
         onClose={handleNotificationsClose}
         open={openNotifications}
       />
+      <AccountPopover
+        anchorEl={accountRef.current}
+        onClose={handleAccountClose}
+        open={openAccount}
+      />
+      <WorkspacePopover
+        anchorEl={workspaceRef.current}
+        onClose={handleWorkspaceClose}
+        open={openWorkspace}
+        defaultWorkspace={defaultWorkspace}
+        workspaces={workspaces}
+      />
     </AppBar>
   );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapStateToProps = (state: any) => {
   return {
-    onLogout: () => dispatch(logout()),
+    defaultWorkspace: get(
+      state,
+      "boot.defaultWorkspace.defaultWorkspace",
+      null
+    ),
+    workspaces: get(state, "boot.workspaces.workspaces", []),
+    notifications: get(state, "boot.notifications.notifications", []),
   };
 };
 
-export default connect(null, mapDispatchToProps)(TopBar);
+export default connect(mapStateToProps, null)(TopBar);

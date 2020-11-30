@@ -4,10 +4,11 @@ import validate from "validate.js";
 import clsx from "clsx";
 import { login } from "../../../../actions/login";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
 
 interface LoginFormProps {
   className: string;
-  onLogin: (email: string, password: string) => void;
+  onLogin: (email: string, password: string) => Promise<string>;
 }
 
 const schema = {
@@ -88,7 +89,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, onLogin }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onLogin(formState.values.email, formState.values.password);
+    onLogin(formState.values.email, formState.values.password)
+      .then((response) => {
+        toast.success("Logged In");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   const hasError = (field: string) =>

@@ -1,0 +1,5 @@
+export enum MembershipPermissions {
+  WORKSPACE_OWN = "WORKSPACE_OWN",
+  WORKSPACE_ADMIN = "WORKSPACE_ADMIN",
+  WORKSPACE_USER = "WORKSPACE_USER",
+}

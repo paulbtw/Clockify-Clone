@@ -3,15 +3,13 @@ import * as types from "../constants/ActionTypes";
 import { actionFailed, actionStart, actionSuccess } from "./utils/template";
 
 export const login = (email: string, password: string) => {
-  return function (dispatch: any) {
+  return (dispatch: any) => {
     dispatch(actionStart(types.LOGIN));
     const body = { email, password };
     const promise = requestApi("/auth/token", "POST", body);
     promise
       .then((user) => {
-        localStorage.setItem("token", user.token);
-        localStorage.setItem("user", JSON.stringify(user.user));
-        dispatch(actionSuccess(types.LOGIN, { user: user }));
+        dispatch(actionSuccess(types.LOGIN));
       })
       .catch((err) => {
         let errorMessage: string;

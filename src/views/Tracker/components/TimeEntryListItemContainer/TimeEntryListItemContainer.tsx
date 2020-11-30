@@ -1,33 +1,15 @@
 import React from "react";
 import { TimeEntryListItem } from "..";
+import { timeEntriesInterface } from "../../../../types/timeEntries";
 
 interface TimeEntryListItemContainerProps {
-  key: string;
-  text: string;
-  id: string;
-  startTime: string;
-  endTime: string | null;
-  tagId: string | null;
+  entry: timeEntriesInterface;
 }
 
 const TimeEntryListItemContainer: React.FC<TimeEntryListItemContainerProps> = ({
-  key,
-  text,
-  id,
-  startTime,
-  endTime,
-  tagId,
+  entry,
 }) => {
-  return (
-    <TimeEntryListItem
-      key={key}
-      text={text}
-      id={id}
-      startTime={startTime}
-      endTime={endTime}
-      tagId={tagId}
-    />
-  );
+  return <TimeEntryListItem key={entry.id} entry={entry} />;
 };
 
 export default TimeEntryListItemContainer;

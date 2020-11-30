@@ -1,14 +1,6 @@
 import * as types from "../constants/ActionTypes";
 
-const initialState: AuthState = {
-  userLoggedIn: localStorage.getItem("token") ? true : false,
-  user: {
-    token: localStorage.getItem("token") ? localStorage.getItem("token") : null,
-    user: localStorage.getItem("user")
-      ? JSON.parse(localStorage.getItem("user") as string)
-      : null,
-  },
-};
+const initialState: AuthState = {};
 
 export interface AuthState {
   userLoggedIn?: boolean;
@@ -30,7 +22,7 @@ const auth = (
       if (action.status === "success") {
         return {
           ...action,
-          userLoggedIn: true,
+          userLoggedIn: undefined,
         };
       } else {
         return {
@@ -43,7 +35,7 @@ const auth = (
       if (action.status === "success") {
         return {
           ...action,
-          userLoggedIn: true,
+          userLoggedIn: undefined,
         };
       } else {
         return {
@@ -57,6 +49,7 @@ const auth = (
         return {
           ...action,
           userLoggedIn: true,
+          user: action.user,
         };
       } else if ("isFetching" in action && action.isFetching) {
         return Object.assign({}, state, { isFetching: action.isFetching });
