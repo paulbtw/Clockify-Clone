@@ -1,11 +1,13 @@
-import { Button, makeStyles, TextField, Theme } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
-import clsx from "clsx";
-import validate from "validate.js";
-import { requestApi } from "../../../../utils/api";
-import { toast } from "react-toastify";
-import { requestPasswordReset } from "../../../../actions/resetPassword";
-import { connect, useSelector } from "react-redux";
+import {
+  Button, makeStyles, TextField, Theme,
+} from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import clsx from 'clsx';
+import validate from 'validate.js';
+import { toast } from 'react-toastify';
+import { connect, useSelector } from 'react-redux';
+import { requestApi } from '../../../../utils/api';
+import { requestPasswordReset } from '../../../../actions/resetPassword';
 
 interface ForgotPasswordFormProps {
   className: string;
@@ -14,7 +16,7 @@ interface ForgotPasswordFormProps {
 
 const schema = {
   email: {
-    presence: { allowEmpty: false, message: "is required" },
+    presence: { allowEmpty: false, message: 'is required' },
     email: true,
   },
 };
@@ -23,16 +25,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   fields: {
     margin: theme.spacing(-1),
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
       flexGrow: 1,
       margin: theme.spacing(1),
     },
   },
   submitButton: {
     marginTop: theme.spacing(2),
-    width: "100%",
+    width: '100%',
   },
 }));
 
@@ -44,7 +46,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: { email: "" },
+    values: { email: '' },
     touched: {},
     errors: {} as {
       email?: string[];
@@ -56,13 +58,13 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
 
     setFormState((formState) => ({
       ...formState,
-      isValid: errors ? false : true,
+      isValid: !errors,
       errors: errors || {},
     }));
   }, [formState.values]);
 
   const handleChange = (
-    event: React.FormEvent<HTMLTextAreaElement | HTMLInputElement>
+    event: React.FormEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
     event.persist();
     const savedEvent = event.target as HTMLTextAreaElement | HTMLInputElement;
@@ -71,9 +73,9 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
       values: {
         ...formState.values,
         [savedEvent.name]:
-          savedEvent.type === "checkbox"
+          savedEvent.type === 'checkbox'
             ? // @ts-ignore
-              savedEvent.checked
+            savedEvent.checked
             : savedEvent.value,
       },
       touched: {
@@ -85,7 +87,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
 
   const hasError = (field: string) =>
     // @ts-ignore
-    formState.touched[field] && formState.errors[field] ? true : false;
+    (!!(formState.touched[field] && formState.errors[field]));
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -93,7 +95,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
   };
 
   const errorMesssage = useSelector(
-    (state: any) => state.resetPassword.requestPasswordReset.errorMessage
+    (state: any) => state.resetPassword.requestPasswordReset.errorMessage,
   );
 
   // Error messages
@@ -102,7 +104,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
   }, [errorMesssage]);
 
   const message = useSelector(
-    (state: any) => state.resetPassword.requestPasswordReset.message
+    (state: any) => state.resetPassword.requestPasswordReset.message,
   );
 
   useEffect(() => {
@@ -113,16 +115,16 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
     <form className={clsx(classes.root, className)} onSubmit={handleSubmit}>
       <div className={classes.fields}>
         <TextField
-          error={hasError("email")}
+          error={hasError('email')}
           fullWidth
           helperText={
             // @ts-ignore
-            hasError("email") ? formState.errors.email[0] : null
+            hasError('email') ? formState.errors.email[0] : null
           }
           label="E-Mail"
           name="email"
           onChange={handleChange}
-          value={formState.values.email || ""}
+          value={formState.values.email || ''}
           variant="outlined"
         />
       </div>
@@ -140,12 +142,10 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    onForgotPassword: (email: string) => {
-      dispatch(requestPasswordReset(email));
-    },
-  };
-};
+const mapDispatchToProps = (dispatch: any) => ({
+  onForgotPassword: (email: string) => {
+    dispatch(requestPasswordReset(email));
+  },
+});
 
 export default connect(null, mapDispatchToProps)(ForgotPasswordForm);

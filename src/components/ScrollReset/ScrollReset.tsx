@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import useRouter from "../../utils/useRouter";
+import React, { useEffect } from 'react';
+import useRouter from '../../utils/useRouter';
 
 const ScrollReset: React.FC = () => {
   const router = useRouter();

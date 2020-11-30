@@ -1,14 +1,14 @@
-export const pad0Left = (num: string | number) => String("0" + num).slice(-2);
+export const pad0Left = (num: string | number) => String(`0${num}`).slice(-2);
 
 export const getTimeDuration = (
   startTime: Date | number | string,
-  endTime: Date | number | string | null
+  endTime: Date | number | string | null,
 ) => {
-  if (typeof startTime === "string" || typeof startTime === "number") {
+  if (typeof startTime === 'string' || typeof startTime === 'number') {
     startTime = new Date(startTime);
   }
 
-  if (typeof endTime === "string" || typeof endTime === "number") {
+  if (typeof endTime === 'string' || typeof endTime === 'number') {
     endTime = new Date(endTime);
   }
   if (!(endTime instanceof Date)) {
@@ -16,7 +16,7 @@ export const getTimeDuration = (
   }
 
   const durationInSecond = Math.round(
-    (endTime.getTime() - startTime.getTime()) / 1000
+    (endTime.getTime() - startTime.getTime()) / 1000,
   );
 
   // https://stackoverflow.com/questions/1322732/convert-seconds-to-hh-mm-ss-with-javascript
@@ -24,18 +24,17 @@ export const getTimeDuration = (
 };
 
 export const toAmPm = (date: Date | string | number | null) => {
-  if (typeof date == "string" || typeof date === "number") {
+  if (typeof date === 'string' || typeof date === 'number') {
     date = new Date(date);
   }
 
   if (date instanceof Date) {
     let hours = date.getHours();
     const minutes = date.getMinutes();
-    const amPm = hours >= 12 ? "PM" : "AM";
+    const amPm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12 || 12;
     return `${hours}:${pad0Left(minutes)} ${amPm}`;
-  } else {
-    console.log("input is not a date");
-    return false;
   }
+  console.log('input is not a date');
+  return false;
 };

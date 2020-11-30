@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext } from 'react';
 import {
   Card,
   CardHeader,
@@ -10,10 +10,10 @@ import {
   DialogContentText,
   DialogContent,
   DialogActions,
-} from "@material-ui/core";
-import { toast } from "react-toastify";
-import { useHistory } from "react-router-dom";
-import { requestApi } from "../../../../utils/api";
+} from '@material-ui/core';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
+import { requestApi } from '../../../../utils/api';
 
 const Delete: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -28,16 +28,16 @@ const Delete: React.FC = () => {
   const history = useHistory();
   const onDeleteClick = async () => {
     try {
-      const response = await requestApi("/auth/delete", "DELETE");
+      const response = await requestApi('/auth/delete', 'DELETE');
 
       if (response.success) {
         toast.success(response.message);
-        localStorage.removeItem("token");
-        history.push("/");
+        localStorage.removeItem('token');
+        history.push('/');
       }
     } catch (err) {
       console.log(err.message);
-      toast.error("Failed to delete");
+      toast.error('Failed to delete');
     }
   };
 
@@ -53,7 +53,9 @@ const Delete: React.FC = () => {
           <DialogTitle id="dialog-title">Delete Account</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Your account will be permanently deleted. <br />
+              Your account will be permanently deleted.
+              {' '}
+              <br />
               Are you sure you want to delete this account?
             </DialogContentText>
           </DialogContent>

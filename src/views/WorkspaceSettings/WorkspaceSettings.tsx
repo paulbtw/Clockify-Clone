@@ -6,16 +6,16 @@ import {
   Tabs,
   Theme,
   Typography,
-} from "@material-ui/core";
-import { TabContext, TabPanel } from "@material-ui/lab";
-import React, { useState } from "react";
-import { Page } from "../../components";
+} from '@material-ui/core';
+import { TabContext, TabPanel } from '@material-ui/lab';
+import React, { useState } from 'react';
+import { Page } from '../../components';
 
 interface WorkspaceSettingsProps {}
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: "100%",
+    height: '100%',
     padding: theme.spacing(3),
   },
   paperContainer: {
@@ -23,16 +23,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const a11yProps = (index: any) => {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-};
+const a11yProps = (index: any) => ({
+  id: `simple-tab-${index}`,
+  'aria-controls': `simple-tabpanel-${index}`,
+});
 
 const WorkspaceSettings: React.FC<WorkspaceSettingsProps> = ({}) => {
   const classes = useStyles();
-  const [tabValue, setTabValue] = useState("settings");
+  const [tabValue, setTabValue] = useState('settings');
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setTabValue(newValue);

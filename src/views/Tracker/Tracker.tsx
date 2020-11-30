@@ -1,11 +1,11 @@
-import { Grid, makeStyles, Theme } from "@material-ui/core";
-import React from "react";
-import { Page } from "../../components";
-import { TimeEntryInputContainer, TimeEntryListContainer } from "./components";
+import { Grid, makeStyles, Theme } from '@material-ui/core';
+import React from 'react';
+import { Page } from '../../components';
+import { TimeEntryInputContainer, TimeEntryListContainer } from './components';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: "100%",
+    height: '100%',
     padding: theme.spacing(3),
   },
   container: {

@@ -6,10 +6,10 @@ import {
   Divider,
   makeStyles,
   Popover,
-} from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
-import React from "react";
-import { NotificationList, EmptyList } from "./components";
+} from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
+import React from 'react';
+import { NotificationList, EmptyList } from './components';
 
 interface NotificationsPopoverProps {
   anchorEl: any;
@@ -22,11 +22,11 @@ interface NotificationsPopoverProps {
 const useStyles = makeStyles(() => ({
   root: {
     width: 350,
-    maxWidth: "100%",
+    maxWidth: '100%',
   },
   actions: {
     backgroundColor: colors.grey[50],
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   emptyList: {},
 }));
@@ -43,8 +43,8 @@ const NotificationsPopover: React.FC<NotificationsPopoverProps> = ({
     <Popover
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "left",
+        vertical: 'bottom',
+        horizontal: 'left',
       }}
       open={open}
       onClose={onClose}

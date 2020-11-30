@@ -1,20 +1,19 @@
-import moment from "moment";
-import { timeEntriesInterface } from "../types/timeEntries";
+import moment from 'moment';
+import { timeEntriesInterface } from '../types/timeEntries';
 
 const getDate = (date: string) => {
   const formattedDate = new Date(date);
 
   const today = new Date();
-  let yesterday = new Date();
+  const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
 
-  if (moment(date).isSame(today, "day")) {
-    return "Today";
-  } else if (moment(date).isSame(yesterday, "day")) {
-    return "Yesterday";
-  } else {
-    return moment(date).format("ddd, D MMM");
+  if (moment(date).isSame(today, 'day')) {
+    return 'Today';
+  } if (moment(date).isSame(yesterday, 'day')) {
+    return 'Yesterday';
   }
+  return moment(date).format('ddd, D MMM');
 };
 
 export const groupByDay = (timeEntries: timeEntriesInterface[]) => {
@@ -24,9 +23,7 @@ export const groupByDay = (timeEntries: timeEntriesInterface[]) => {
         return entry;
       }
     })
-    .sort((a, b) => {
-      return new Date(b.start).getTime() - new Date(a.start).getTime();
-    });
+    .sort((a, b) => new Date(b.start).getTime() - new Date(a.start).getTime());
 
   const result = [] as { date: string; entries: timeEntriesInterface[] }[];
   sortedEntries.forEach((entry) => {

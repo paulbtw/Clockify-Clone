@@ -1,1 +1,1 @@
-export { default } from "./ManageWorkspaces";
+export { default } from './ManageWorkspaces';

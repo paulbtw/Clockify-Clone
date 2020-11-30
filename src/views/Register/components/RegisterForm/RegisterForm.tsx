@@ -7,13 +7,13 @@ import {
   TextField,
   Theme,
   Typography,
-} from "@material-ui/core";
-import React, { useContext, useEffect, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import validate from "validate.js";
-import clsx from "clsx";
-import { register } from "../../../../actions/register";
-import { connect } from "react-redux";
+} from '@material-ui/core';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import validate from 'validate.js';
+import clsx from 'clsx';
+import { connect } from 'react-redux';
+import { register } from '../../../../actions/register';
 
 interface RegisterFormProps {
   className: string;
@@ -22,24 +22,24 @@ interface RegisterFormProps {
 
 const schema = {
   email: {
-    presence: { allowEmpty: false, message: "is required" },
+    presence: { allowEmpty: false, message: 'is required' },
     email: true,
     length: {
       maximum: 64,
     },
   },
   password: {
-    presence: { allowEmpty: false, message: "is required" },
+    presence: { allowEmpty: false, message: 'is required' },
     length: {
       minimum: 6,
       maximum: 128,
     },
   },
   policy: {
-    presence: { allowEmpty: false, message: "is required" },
+    presence: { allowEmpty: false, message: 'is required' },
     inclusion: {
       within: [true],
-      message: "is required",
+      message: 'is required',
     },
   },
 };
@@ -48,23 +48,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   fields: {
     margin: theme.spacing(-1),
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
       flexGrow: 1,
       margin: theme.spacing(1),
     },
   },
   policy: {
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
   },
   policyCheckbox: {
-    marginLeft: "-14px",
+    marginLeft: '-14px',
   },
   submitButton: {
     marginTop: theme.spacing(2),
-    width: "100%",
+    width: '100%',
   },
 }));
 
@@ -76,7 +76,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: { email: "", password: "", policy: false },
+    values: { email: '', password: '', policy: false },
     touched: {},
     errors: {} as {
       email?: string[];
@@ -90,13 +90,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 
     setFormState((formState) => ({
       ...formState,
-      isValid: errors ? false : true,
+      isValid: !errors,
       errors: errors || {},
     }));
   }, [formState.values]);
 
   const handleChange = (
-    event: React.FormEvent<HTMLTextAreaElement | HTMLInputElement>
+    event: React.FormEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
     event.persist();
     const savedEvent = event.target as HTMLTextAreaElement | HTMLInputElement;
@@ -105,9 +105,9 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
       values: {
         ...formState.values,
         [savedEvent.name]:
-          savedEvent.type === "checkbox"
+          savedEvent.type === 'checkbox'
             ? // @ts-ignore
-              savedEvent.checked
+            savedEvent.checked
             : savedEvent.value,
       },
       touched: {
@@ -122,40 +122,40 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
     onRegister(
       formState.values.email,
       formState.values.password,
-      formState.values.policy
+      formState.values.policy,
     );
   };
 
   const hasError = (field: string) =>
     // @ts-ignore
-    formState.touched[field] && formState.errors[field] ? true : false;
+    (!!(formState.touched[field] && formState.errors[field]));
 
   return (
     <form className={clsx(classes.root, className)} onSubmit={handleSubmit}>
       <div className={classes.fields}>
         <TextField
-          error={hasError("email")}
+          error={hasError('email')}
           fullWidth
           // @ts-ignore
-          helperText={hasError("email") ? formState.errors.email[0] : null}
+          helperText={hasError('email') ? formState.errors.email[0] : null}
           label="Email address"
           name="email"
           onChange={(event) => handleChange(event)}
-          value={formState.values.email || ""}
+          value={formState.values.email || ''}
           variant="outlined"
         />
         <TextField
-          error={hasError("password")}
+          error={hasError('password')}
           fullWidth
           helperText={
             // @ts-ignore
-            hasError("password") ? formState.errors.password[0] : null
+            hasError('password') ? formState.errors.password[0] : null
           }
           label="Password"
           name="password"
           onChange={(event) => handleChange(event)}
           type="password"
-          value={formState.values.password || ""}
+          value={formState.values.password || ''}
           variant="outlined"
         />
         <div>
@@ -168,7 +168,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
               onChange={(event) => handleChange(event)}
             />
             <Typography color="textSecondary" variant="body1">
-              I have read the{" "}
+              I have read the
+              {' '}
               <Link
                 color="secondary"
                 component={RouterLink}
@@ -180,7 +181,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
               </Link>
             </Typography>
           </div>
-          {hasError("policy") && (
+          {hasError('policy') && (
             // @ts-ignore
             <FormHelperText error>{formState.errors.policy[0]}</FormHelperText>
           )}
@@ -200,11 +201,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    onRegister: (email: string, password: string, policy: boolean) =>
-      dispatch(register(email, password, policy)),
-  };
-};
+const mapDispatchToProps = (dispatch: any) => ({
+  onRegister: (email: string, password: string, policy: boolean) => dispatch(register(email, password, policy)),
+});
 
 export default connect(null, mapDispatchToProps)(RegisterForm);

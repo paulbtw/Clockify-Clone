@@ -1,7 +1,7 @@
-import { Button } from "@material-ui/core";
-import React from "react";
-import { IWorkspace } from "../../../../constants/WorkspaceTypes";
-import CheckIcon from "@material-ui/icons/Check";
+import { Button } from '@material-ui/core';
+import React from 'react';
+import CheckIcon from '@material-ui/icons/Check';
+import { IWorkspace } from '../../../../constants/WorkspaceTypes';
 
 interface WorkspaceItemProps {
   workspace: IWorkspace;
@@ -13,19 +13,15 @@ const WorkspaceItem: React.FC<WorkspaceItemProps> = ({
   workspace,
   onClick,
   active,
-}) => {
-  return (
-    <Button
-      fullWidth
-      id={workspace.id}
-      onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
-        onClick(event.currentTarget.id)
-      }
-      endIcon={active && <CheckIcon color="primary" />}
-    >
-      {workspace.name}
-    </Button>
-  );
-};
+}) => (
+  <Button
+    fullWidth
+    id={workspace.id}
+    onClick={(event: React.MouseEvent<HTMLButtonElement>) => onClick(event.currentTarget.id)}
+    endIcon={active && <CheckIcon color="primary" />}
+  >
+    {workspace.name}
+  </Button>
+);
 
 export default WorkspaceItem;

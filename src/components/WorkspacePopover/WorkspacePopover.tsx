@@ -7,14 +7,14 @@ import {
   Paper,
   Popover,
   Typography,
-} from "@material-ui/core";
-import React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { connect } from "react-redux";
-import { IWorkspace } from "../../constants/WorkspaceTypes";
-import { WorkspaceItem } from "./components";
-import { get } from "lodash";
-import { changeDefaultWorkspace } from "../../actions/workspace";
+} from '@material-ui/core';
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { get } from 'lodash';
+import { IWorkspace } from '../../constants/WorkspaceTypes';
+import { WorkspaceItem } from './components';
+import { changeDefaultWorkspace } from '../../actions/workspace';
 
 interface WorkspacePopoverProps {
   anchorEl: any;
@@ -33,11 +33,11 @@ interface WorkspacePopoverProps {
 const useStyles = makeStyles(() => ({
   root: {
     width: 200,
-    maxWidth: "100%",
+    maxWidth: '100%',
   },
   actions: {
     backgroundColor: colors.grey[50],
-    justifyContent: "left",
+    justifyContent: 'left',
     padding: 0,
   },
 }));
@@ -71,22 +71,22 @@ const WorkspacePopover: React.FC<WorkspacePopoverProps> = ({
       onClose={onClose}
       className={className}
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "left",
+        vertical: 'bottom',
+        horizontal: 'left',
       }}
     >
       <div className={classes.root}>
         <CardHeader
           title="Workspaces"
-          action={
+          action={(
             <Typography component={RouterLink} to="/dashboard/workspaces">
               Manage
             </Typography>
-          }
+          )}
         />
         <Divider />
         {workspaces.map((workspace) => {
-          let active = workspace.id === defaultWorkspace.id;
+          const active = workspace.id === defaultWorkspace.id;
 
           return (
             <WorkspaceItem
@@ -102,17 +102,12 @@ const WorkspacePopover: React.FC<WorkspacePopoverProps> = ({
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {
-    userId: get(state, "auth.user.id", null),
-  };
-};
+const mapStateToProps = (state: any) => ({
+  userId: get(state, 'auth.user.id', null),
+});
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    changeDefaultWorkspace: (workspaceId: string, userId: string) =>
-      dispatch(changeDefaultWorkspace(workspaceId, userId)),
-  };
-};
+const mapDispatchToProps = (dispatch: any) => ({
+  changeDefaultWorkspace: (workspaceId: string, userId: string) => dispatch(changeDefaultWorkspace(workspaceId, userId)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkspacePopover);

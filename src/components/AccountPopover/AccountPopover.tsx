@@ -7,12 +7,12 @@ import {
   makeStyles,
   Popover,
   Switch,
-} from "@material-ui/core";
-import { get } from "lodash";
-import React from "react";
-import { connect } from "react-redux";
-import { NavLink as RouterLink } from "react-router-dom";
-import { logout } from "../../actions/logout";
+} from '@material-ui/core';
+import { get } from 'lodash';
+import React from 'react';
+import { connect } from 'react-redux';
+import { NavLink as RouterLink } from 'react-router-dom';
+import { logout } from '../../actions/logout';
 
 interface AccountPopoverProps {
   anchorEl: any;
@@ -27,11 +27,11 @@ interface AccountPopoverProps {
 const useStyles = makeStyles(() => ({
   root: {
     width: 200,
-    maxWidth: "100%",
+    maxWidth: '100%',
   },
   actions: {
     backgroundColor: colors.grey[50],
-    justifyContent: "left",
+    justifyContent: 'left',
     padding: 0,
   },
 }));
@@ -53,8 +53,8 @@ const AccountPopover: React.FC<AccountPopoverProps> = ({
       onClose={onClose}
       className={className}
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "left",
+        vertical: 'bottom',
+        horizontal: 'left',
       }}
     >
       <div className={classes.root}>
@@ -80,17 +80,13 @@ const AccountPopover: React.FC<AccountPopoverProps> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    onLogout: () => dispatch(logout()),
-  };
-};
+const mapDispatchToProps = (dispatch: any) => ({
+  onLogout: () => dispatch(logout()),
+});
 
-const mapStateToProps = (state: any) => {
-  return {
-    userName: get(state, "auth.user.name", "User"),
-    userEmail: get(state, "auth.user.email", null),
-  };
-};
+const mapStateToProps = (state: any) => ({
+  userName: get(state, 'auth.user.name', 'User'),
+  userEmail: get(state, 'auth.user.email', null),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountPopover);

@@ -1,6 +1,6 @@
-import { makeStyles, Theme, Typography } from "@material-ui/core";
-import clsx from "clsx";
-import React from "react";
+import { makeStyles, Theme, Typography } from '@material-ui/core';
+import clsx from 'clsx';
+import React from 'react';
 
 interface EmptyListProps {
   className: string;
@@ -8,16 +8,16 @@ interface EmptyListProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    textAlign: "center",
+    textAlign: 'center',
     padding: theme.spacing(3),
   },
   image: {
     height: 240,
     backgroundImage: 'url("/images/undraw_empty_xct9.svg")',
-    backgroundPositionX: "right",
-    backgroundPositionY: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
+    backgroundPositionX: 'right',
+    backgroundPositionY: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
   },
 }));
 

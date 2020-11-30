@@ -1,11 +1,11 @@
-import { Action } from "history";
-import { combineReducers } from "redux";
-import * as types from "../constants/ActionTypes";
+import { Action } from 'history';
+import { combineReducers } from 'redux';
+import * as types from '../constants/ActionTypes';
 import {
   INotificationInvite,
   INotificationMessage,
-} from "../constants/NotificationTypes";
-import { IWorkspace } from "../constants/WorkspaceTypes";
+} from '../constants/NotificationTypes';
+import { IWorkspace } from '../constants/WorkspaceTypes';
 
 const initialState: BootState = {};
 
@@ -24,7 +24,7 @@ const defaultWorkspaceInitialState: DefaultWorkspaceState = {};
 
 const defaultWorkspace = (
   state = defaultWorkspaceInitialState,
-  action: { type: string; status: string; isFetching?: boolean; payload?: any }
+  action: { type: string; status: string; isFetching?: boolean; payload?: any },
 ) => {
   switch (action.type) {
     case types.GET_DEFAULT_WORKSPACE:
@@ -35,7 +35,7 @@ const defaultWorkspace = (
         };
       }
 
-      if (action.status && action.status === "success") {
+      if (action.status && action.status === 'success') {
         return {
           ...state,
           defaultWorkspace: action.payload,
@@ -57,7 +57,7 @@ const workspacesInitialState: WorkspacesState = {};
 
 const workspaces = (
   state = workspacesInitialState,
-  action: { type: string; status: string; isFetching?: boolean; payload?: any }
+  action: { type: string; status: string; isFetching?: boolean; payload?: any },
 ) => {
   switch (action.type) {
     case types.GET_WORKSPACES:
@@ -67,7 +67,7 @@ const workspaces = (
           isFetching: true,
         };
       }
-      if (action.status && action.status === "success") {
+      if (action.status && action.status === 'success') {
         return {
           ...state,
           workspaces: action.payload,
@@ -89,7 +89,7 @@ const notificationInitialState: NotificationState = {};
 
 const notifications = (
   state = notificationInitialState,
-  action: { type: string; status: string; isFetching?: boolean; payload?: any }
+  action: { type: string; status: string; isFetching?: boolean; payload?: any },
 ) => {
   switch (action.type) {
     case types.GET_NOTIFICATIONS:
@@ -100,7 +100,7 @@ const notifications = (
         };
       }
 
-      if (action.status && action.status === "success") {
+      if (action.status && action.status === 'success') {
         return {
           ...state,
           notificationsArray: action.payload,

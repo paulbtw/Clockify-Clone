@@ -6,30 +6,30 @@ import {
   makeStyles,
   Theme,
   Typography,
-} from "@material-ui/core";
-import React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { Page } from "../../components";
-import ForgotPasswordForm from "./components";
+} from '@material-ui/core';
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { Page } from '../../components';
+import ForgotPasswordForm from './components';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: theme.spacing(8, 5),
   },
   card: {
     width: theme.breakpoints.values.sm,
-    maxWidth: "100%",
-    overflow: "unset",
-    display: "flex",
-    position: "relative",
-    "& > *": {
+    maxWidth: '100%',
+    overflow: 'unset',
+    display: 'flex',
+    position: 'relative',
+    '& > *': {
       flexGrow: 1,
-      flexBasis: "50%",
-      width: "50%",
+      flexBasis: '50%',
+      width: '50%',
     },
   },
   content: {
@@ -40,11 +40,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderBottomRightRadius: 4,
     padding: theme.spacing(3),
     // color: theme.palette.white,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-end",
-    [theme.breakpoints.down("md")]: {
-      display: "none",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
     },
   },
   icon: {
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     // color: theme.palette,
     borderRadius: theme.shape.borderRadius,
     padding: theme.spacing(1),
-    position: "absolute",
+    position: 'absolute',
     top: -32,
     left: theme.spacing(3),
     height: 64,
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   person: {
     marginTop: theme.spacing(2),
-    display: "flex",
+    display: 'flex',
   },
   avatar: {
     marginRight: theme.spacing(2),

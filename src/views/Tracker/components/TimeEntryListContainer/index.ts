@@ -1,1 +1,1 @@
-export { default } from "./TimeEntryListContainer";
+export { default } from './TimeEntryListContainer';

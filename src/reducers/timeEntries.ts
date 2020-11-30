@@ -1,6 +1,6 @@
-import { actionSuccess } from "../actions/utils/template";
-import * as types from "../constants/ActionTypes";
-import { timeEntriesInterface } from "../types/timeEntries";
+import { actionSuccess } from '../actions/utils/template';
+import * as types from '../constants/ActionTypes';
+import { timeEntriesInterface } from '../types/timeEntries';
 
 export interface TimeEntriesState {
   entries: timeEntriesInterface[];
@@ -18,7 +18,7 @@ const timeEntries = (
     isFetching?: boolean;
     removedSuccess?: boolean;
     payload: { [key: string]: any };
-  }
+  },
 ) => {
   switch (action.type) {
     case types.TIME_ENTRIES_FETCH_LIST:
@@ -28,15 +28,14 @@ const timeEntries = (
             ...state,
             isFetching: true,
           };
-        } else {
-          return {
-            ...state,
-            isFetching: true,
-          };
         }
+        return {
+          ...state,
+          isFetching: true,
+        };
       }
 
-      if (action.status && action.status === "success") {
+      if (action.status && action.status === 'success') {
         return {
           ...state,
           entries: action.payload,
@@ -54,17 +53,17 @@ const timeEntries = (
           isFetching: true,
         };
       }
-      if (action.status && action.status === "success" && state.entries) {
-        let entry = Object.assign({}, state.entries[action.payload.entryId]);
+      if (action.status && action.status === 'success' && state.entries) {
+        const entry = { ...state.entries[action.payload.entryId] };
         entry.tagId = action.payload.tagId;
 
-        let entries = Object.assign({}, state.entries);
+        const entries = { ...state.entries };
         entries[action.payload.entryId] = entry;
 
         return {
           ...state,
           isFetching: false,
-          entries: entries,
+          entries,
         };
       }
       return state;
@@ -76,10 +75,10 @@ const timeEntries = (
           isFetching: true,
         };
       }
-      if (action.status && action.status === "success") {
-        let newEntries = [...state.entries];
-        let entryIndex = newEntries.findIndex(
-          (x) => x.id === action.payload.id
+      if (action.status && action.status === 'success') {
+        const newEntries = [...state.entries];
+        const entryIndex = newEntries.findIndex(
+          (x) => x.id === action.payload.id,
         );
         newEntries.splice(entryIndex, 1);
         return {
@@ -96,8 +95,8 @@ const timeEntries = (
           isFetching: true,
         };
       }
-      if (action.status && action.status === "success") {
-        let newEntries = [...state.entries];
+      if (action.status && action.status === 'success') {
+        const newEntries = [...state.entries];
         // Payload is not typed as an Entries Object, dont know how to fix yet!
         // @ts-ignore
         newEntries?.push(action.payload);
@@ -114,9 +113,9 @@ const timeEntries = (
           isFetching: true,
         };
       }
-      if (action.status && action.status === "success") {
-        let newEntries = [...state.entries];
-        let foundIndex = newEntries.findIndex((x) => x.id == action.payload.id);
+      if (action.status && action.status === 'success') {
+        const newEntries = [...state.entries];
+        const foundIndex = newEntries.findIndex((x) => x.id == action.payload.id);
         // Payload is not typed as an Entries Object, dont know how to fix yet!
         // @ts-ignore
         newEntries[foundIndex] = action.payload;

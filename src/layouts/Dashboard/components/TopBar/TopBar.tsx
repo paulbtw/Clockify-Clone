@@ -11,27 +11,27 @@ import {
   FormControl,
   MenuItem,
   Button,
-} from "@material-ui/core";
-import clsx from "clsx";
-import React, { useRef } from "react";
-import { useState } from "react";
-import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import MenuIcon from "@material-ui/icons/Menu";
-import InputIcon from "@material-ui/icons/Input";
+} from '@material-ui/core';
+import clsx from 'clsx';
+import React, { useRef, useState } from 'react';
+
+import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import MenuIcon from '@material-ui/icons/Menu';
+import InputIcon from '@material-ui/icons/Input';
+import { connect } from 'react-redux';
+import { get } from 'lodash';
 import {
   AccountPopover,
   NotificationsPopover,
   WorkspacePopover,
-} from "../../../../components";
-import { connect } from "react-redux";
-import { logout } from "../../../../actions/logout";
-import { get } from "lodash";
-import { IWorkspace } from "../../../../constants/WorkspaceTypes";
+} from '../../../../components';
+import { logout } from '../../../../actions/logout';
+import { IWorkspace } from '../../../../constants/WorkspaceTypes';
 import {
   INotificationInvite,
   INotificationMessage,
-} from "../../../../constants/NotificationTypes";
+} from '../../../../constants/NotificationTypes';
 
 interface TopBarProps {
   onMobileNavOpen: () => void;
@@ -156,16 +156,14 @@ const TopBar: React.FC<TopBarProps> = ({
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {
-    defaultWorkspace: get(
-      state,
-      "boot.defaultWorkspace.defaultWorkspace",
-      null
-    ),
-    workspaces: get(state, "boot.workspaces.workspaces", []),
-    notifications: get(state, "boot.notifications.notifications", []),
-  };
-};
+const mapStateToProps = (state: any) => ({
+  defaultWorkspace: get(
+    state,
+    'boot.defaultWorkspace.defaultWorkspace',
+    null,
+  ),
+  workspaces: get(state, 'boot.workspaces.workspaces', []),
+  notifications: get(state, 'boot.notifications.notifications', []),
+});
 
 export default connect(mapStateToProps, null)(TopBar);

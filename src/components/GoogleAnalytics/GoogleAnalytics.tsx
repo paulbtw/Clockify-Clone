@@ -1,17 +1,16 @@
-import React from "react";
-import { Helmet } from "react-helmet";
+import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const GA_MEASUREMENT_ID = process.env.REACT_APP_GA_MEASUREMENT_ID;
 
-const GoogleAnalytics: React.FC = () => {
-  return (
-    <Helmet>
-      <script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-      />
-      <script>
-        {`
+const GoogleAnalytics: React.FC = () => (
+  <Helmet>
+    <script
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+    />
+    <script>
+      {`
           window.dataLayer = window.dataLayer || [];
 
           function gtag() {
@@ -21,9 +20,8 @@ const GoogleAnalytics: React.FC = () => {
           gtag('js', new Date());
           gtag('config', '${GA_MEASUREMENT_ID}');
         `}
-      </script>
-    </Helmet>
-  );
-};
+    </script>
+  </Helmet>
+);
 
 export default GoogleAnalytics;

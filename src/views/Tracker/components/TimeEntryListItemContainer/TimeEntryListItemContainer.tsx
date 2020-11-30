@@ -1,6 +1,6 @@
-import React from "react";
-import { TimeEntryListItem } from "..";
-import { timeEntriesInterface } from "../../../../types/timeEntries";
+import React from 'react';
+import { TimeEntryListItem } from '..';
+import { timeEntriesInterface } from '../../../../types/timeEntries';
 
 interface TimeEntryListItemContainerProps {
   entry: timeEntriesInterface;
@@ -8,8 +8,6 @@ interface TimeEntryListItemContainerProps {
 
 const TimeEntryListItemContainer: React.FC<TimeEntryListItemContainerProps> = ({
   entry,
-}) => {
-  return <TimeEntryListItem key={entry.id} entry={entry} />;
-};
+}) => <TimeEntryListItem key={entry.id} entry={entry} />;
 
 export default TimeEntryListItemContainer;

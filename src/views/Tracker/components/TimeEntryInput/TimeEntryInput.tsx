@@ -1,11 +1,11 @@
-import { Button, TextField } from "@material-ui/core";
-import { get } from "lodash";
-import moment from "moment";
-import React, { useEffect, useRef, useState } from "react";
-import { connect } from "react-redux";
-import { startTimer, stopTimer } from "../../../../actions/timeEntries";
-import { timeEntriesInterface } from "../../../../types/timeEntries";
-import { findActive } from "../../../../utils/timeEntries";
+import { Button, TextField } from '@material-ui/core';
+import { get } from 'lodash';
+import moment from 'moment';
+import React, { useEffect, useRef, useState } from 'react';
+import { connect } from 'react-redux';
+import { startTimer, stopTimer } from '../../../../actions/timeEntries';
+import { timeEntriesInterface } from '../../../../types/timeEntries';
+import { findActive } from '../../../../utils/timeEntries';
 
 interface TimeEntryInputProps {
   onStart: (workspaceId: string, text: string, date: string | null) => void;
@@ -26,14 +26,14 @@ const TimeEntryInput: React.FC<TimeEntryInputProps> = ({
   timeEntries,
 }) => {
   const [formState, setFormState] = useState({
-    values: { text: "", date: null },
+    values: { text: '', date: null },
     touched: {},
   });
   const [activeEntry, setActiveEntry] = useState({} as timeEntriesInterface);
   const [duration, setDuration] = useState(0);
 
   const handleChange = (
-    event: React.FormEvent<HTMLTextAreaElement | HTMLInputElement>
+    event: React.FormEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
     event.persist();
     const savedEvent = event.target as HTMLTextAreaElement | HTMLInputElement;
@@ -42,9 +42,9 @@ const TimeEntryInput: React.FC<TimeEntryInputProps> = ({
       values: {
         ...formState.values,
         [savedEvent.name]:
-          savedEvent.type === "checkbox"
+          savedEvent.type === 'checkbox'
             ? // @ts-ignore problem with type detection
-              savedEvent.checked
+            savedEvent.checked
             : savedEvent.value,
       },
       touched: {
@@ -64,7 +64,7 @@ const TimeEntryInput: React.FC<TimeEntryInputProps> = ({
         workspaceId,
         activeEntry?.id,
         formState.values.text,
-        activeEntry?.start
+        activeEntry?.start,
       );
     }
   };
@@ -96,7 +96,7 @@ const TimeEntryInput: React.FC<TimeEntryInputProps> = ({
         value={formState.values.text}
       />
       <Button>Tag</Button>
-      <span style={{ marginLeft: 20, minWidth: 56, display: "inline-block" }}>
+      <span style={{ marginLeft: 20, minWidth: 56, display: 'inline-block' }}>
         {duration}
       </span>
       {Object.keys(activeEntry).length === 0 ? (
@@ -108,27 +108,23 @@ const TimeEntryInput: React.FC<TimeEntryInputProps> = ({
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {
-    workspaceId: get(state, "auth.user.activeWorkspace", null),
-    timeEntries: get(state, "timeEntries.entries", []),
-  };
-};
+const mapStateToProps = (state: any) => ({
+  workspaceId: get(state, 'auth.user.activeWorkspace', null),
+  timeEntries: get(state, 'timeEntries.entries', []),
+});
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    onStart: (workspaceId: string, text: string, date: string | null) => {
-      dispatch(startTimer(workspaceId, text, date));
-    },
-    onStop: (
-      workspaceId: string,
-      timeEntryId: string,
-      text: string,
-      start: string
-    ) => {
-      dispatch(stopTimer(workspaceId, timeEntryId, text, start));
-    },
-  };
-};
+const mapDispatchToProps = (dispatch: any) => ({
+  onStart: (workspaceId: string, text: string, date: string | null) => {
+    dispatch(startTimer(workspaceId, text, date));
+  },
+  onStop: (
+    workspaceId: string,
+    timeEntryId: string,
+    text: string,
+    start: string,
+  ) => {
+    dispatch(stopTimer(workspaceId, timeEntryId, text, start));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimeEntryInput);

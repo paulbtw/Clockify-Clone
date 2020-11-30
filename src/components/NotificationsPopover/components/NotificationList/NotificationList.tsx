@@ -7,16 +7,16 @@ import {
   ListItemText,
   makeStyles,
   Theme,
-} from "@material-ui/core";
-import React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
-import moment from "moment";
-import PaymentIcon from "@material-ui/icons/Payment";
-import PeopleIcon from "@material-ui/icons/PeopleOutlined";
-import CodeIcon from "@material-ui/icons/Code";
-import StoreIcon from "@material-ui/icons/Store";
-import gradients from "../../../../utils/gradients";
+} from '@material-ui/core';
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import moment from 'moment';
+import PaymentIcon from '@material-ui/icons/Payment';
+import PeopleIcon from '@material-ui/icons/PeopleOutlined';
+import CodeIcon from '@material-ui/icons/Code';
+import StoreIcon from '@material-ui/icons/Store';
+import gradients from '../../../../utils/gradients';
 
 interface NotificationListProps {
   notifications: {
@@ -28,16 +28,16 @@ interface NotificationListProps {
 }
 
 enum EType {
-  order = "order",
-  user = "user",
-  project = "project",
-  feature = "feature",
+  order = 'order',
+  user = 'user',
+  project = 'project',
+  feature = 'feature',
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   listItem: {
-    "&:hover": {
+    '&:hover': {
       backgroundColor: theme.palette.background.default,
     },
   },
@@ -97,7 +97,7 @@ const NotificationList: React.FC<NotificationListProps> = ({
           <ListItemAvatar>{avatars[notification.type]}</ListItemAvatar>
           <ListItemText
             primary={notification.title}
-            primaryTypographyProps={{ variant: "body1" }}
+            primaryTypographyProps={{ variant: 'body1' }}
             secondary={moment(notification.createdAt).fromNow()}
           />
           <ArrowForwardIcon className={classes.arrowForwardIcon} />

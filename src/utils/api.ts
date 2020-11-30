@@ -1,30 +1,28 @@
 export const requestApi = async (
-  path = "",
-  method = "GET",
+  path = '',
+  method = 'GET',
   data: { [key: string]: any } | null = null,
-  headers = {}
+  headers = {},
 ) => {
-  const apiUrl = "http://localhost:5000";
+  const apiUrl = 'http://localhost:5000';
 
-  if (!path.startsWith("/")) {
+  if (!path.startsWith('/')) {
     path = `/${path}`;
   }
   const url = `${apiUrl}${path}`;
 
-  headers = Object.assign(
-    {
-      "Content-Type": "application/json",
-    },
-    headers
-  );
+  headers = {
+    'Content-Type': 'application/json',
+    ...headers,
+  };
 
   const response = await fetch(url, {
     method: method.toUpperCase(),
-    mode: "cors",
-    cache: "no-cache",
+    mode: 'cors',
+    cache: 'no-cache',
     headers,
     body: data ? JSON.stringify(data) : null,
-    credentials: "include",
+    credentials: 'include',
   });
   if (response.status < 200 || response.status >= 300) {
     const error = await response.json();

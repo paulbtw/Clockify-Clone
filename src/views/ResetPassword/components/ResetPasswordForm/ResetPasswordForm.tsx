@@ -1,10 +1,12 @@
-import { Button, makeStyles, TextField, Theme } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
-import clsx from "clsx";
-import { requestApi } from "../../../../utils/api";
-import { toast } from "react-toastify";
-import validate from "validate.js";
-import { useHistory } from "react-router-dom";
+import {
+  Button, makeStyles, TextField, Theme,
+} from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import clsx from 'clsx';
+import { toast } from 'react-toastify';
+import validate from 'validate.js';
+import { useHistory } from 'react-router-dom';
+import { requestApi } from '../../../../utils/api';
 
 interface ResetPasswordFormProps {
   className: string;
@@ -13,14 +15,14 @@ interface ResetPasswordFormProps {
 
 const schema = {
   password: {
-    presence: { allowEmpty: false, message: "is required" },
+    presence: { allowEmpty: false, message: 'is required' },
     length: {
       minimum: 6,
       maximum: 128,
     },
   },
   confirmPassword: {
-    presence: { allowEmpty: false, message: "is required" },
+    presence: { allowEmpty: false, message: 'is required' },
     length: {
       minimum: 6,
       maximum: 128,
@@ -32,16 +34,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   fields: {
     margin: theme.spacing(-1),
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
       flexGrow: 1,
       margin: theme.spacing(1),
     },
   },
   submitButton: {
     marginTop: theme.spacing(2),
-    width: "100%",
+    width: '100%',
   },
 }));
 
@@ -54,7 +56,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 
   const [formState, setFormState] = useState({
     isValid: false,
-    values: { token: token, password: "", confirmPassword: "" },
+    values: { token, password: '', confirmPassword: '' },
     touched: {},
     errors: {} as {
       password?: string[];
@@ -67,13 +69,13 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 
     setFormState((formState) => ({
       ...formState,
-      isValid: errors ? false : true,
+      isValid: !errors,
       errors: errors || {},
     }));
   }, [formState.values]);
 
   const handleChange = (
-    event: React.FormEvent<HTMLTextAreaElement | HTMLInputElement>
+    event: React.FormEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => {
     event.persist();
     const savedEvent = event.target as HTMLTextAreaElement | HTMLInputElement;
@@ -82,9 +84,9 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
       values: {
         ...formState.values,
         [savedEvent.name]:
-          savedEvent.type === "checkbox"
+          savedEvent.type === 'checkbox'
             ? // @ts-ignore
-              savedEvent.checked
+            savedEvent.checked
             : savedEvent.value,
       },
       touched: {
@@ -96,40 +98,40 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 
   const hasError = (field: string) =>
     // @ts-ignore
-    formState.touched[field] && formState.errors[field] ? true : false;
+    (!!(formState.touched[field] && formState.errors[field]));
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const token = formState.values.token;
-      const password = formState.values.password;
-      const confirmPassword = formState.values.confirmPassword;
+      const { token } = formState.values;
+      const { password } = formState.values;
+      const { confirmPassword } = formState.values;
       const body = { token, password, confirmPassword };
-      const response = await requestApi(`/auth/reset/${token}`, "PUT", body);
+      const response = await requestApi(`/auth/reset/${token}`, 'PUT', body);
 
       if (response.success) {
         toast.success(response.message);
-        history.push("/login");
+        history.push('/login');
       }
     } catch (err) {
       console.log(err.message);
-      toast.error("Password change failed");
+      toast.error('Password change failed');
     }
   };
 
   useEffect(() => {
     const testToken = async () => {
       try {
-        const response = await requestApi(`/auth/reset/${token}`, "GET");
+        const response = await requestApi(`/auth/reset/${token}`, 'GET');
 
         if (!response.success) {
           toast.error(response.message);
-          console.log("history push");
-          history.push("/reset");
+          console.log('history push');
+          history.push('/reset');
         }
       } catch (err) {
         toast.error(err.message);
-        history.push("/reset");
+        history.push('/reset');
       }
     };
 
@@ -145,38 +147,38 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
           label="Reset Token"
           name="token"
           onChange={handleChange}
-          value={formState.values.token || ""}
+          value={formState.values.token || ''}
           disabled
           variant="outlined"
         />
         <TextField
-          error={hasError("password")}
+          error={hasError('password')}
           fullWidth
           helperText={
             // @ts-ignore
-            hasError("password") ? formState.errors.password[0] : null
+            hasError('password') ? formState.errors.password[0] : null
           }
           label="Password"
           name="password"
           onChange={handleChange}
           type="password"
-          value={formState.values.password || ""}
+          value={formState.values.password || ''}
           variant="outlined"
         />
         <TextField
-          error={hasError("confirmPassword")}
+          error={hasError('confirmPassword')}
           fullWidth
           helperText={
-            hasError("confirmPassword")
+            hasError('confirmPassword')
               ? // @ts-ignore
-                formState.errors.confirmPassword[0]
+              formState.errors.confirmPassword[0]
               : null
           }
           label="Confirm password"
           name="confirmPassword"
           onChange={handleChange}
           type="password"
-          value={formState.values.confirmPassword || ""}
+          value={formState.values.confirmPassword || ''}
           variant="outlined"
         />
       </div>

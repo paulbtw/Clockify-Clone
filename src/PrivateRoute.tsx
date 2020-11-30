@@ -1,7 +1,7 @@
-import { get } from "lodash";
-import React, { ComponentType } from "react";
-import { connect } from "react-redux";
-import { Redirect, Route } from "react-router-dom";
+import { get } from 'lodash'
+import React, { ComponentType } from 'react'
+import { connect } from 'react-redux'
+import { Redirect, Route } from 'react-router-dom'
 
 interface PrivateRouteProps {
   Component: ComponentType<any>;
@@ -23,26 +23,24 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
     {...rest}
     render={(props) => {
       if (!userLoggedIn || !user) {
-        return <Redirect to="/login" />;
+        return <Redirect to="/login" />
       }
       const currentMembership = user.memberships.find(
         (x: any) => x.workspaceId === user.activeWorkspace
-      );
+      )
 
       if (roles && roles.indexOf(currentMembership.permissions) === -1) {
-        return <Redirect to="/dashboard/tracker" />;
+        return <Redirect to="/dashboard/tracker" />
       }
 
-      return <Component {...props} />;
+      return <Component {...props} />
     }}
   />
-);
+)
 
-const mapStateToProps = (state: any) => {
-  return {
-    user: get(state, "auth.user", null),
-    userLoggedIn: get(state, "auth.userLoggedIn", null),
-  };
-};
+const mapStateToProps = (state: any) => ({
+  user: get(state, 'auth.user', null),
+  userLoggedIn: get(state, 'auth.userLoggedIn', null)
+})
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default connect(mapStateToProps)(PrivateRoute)

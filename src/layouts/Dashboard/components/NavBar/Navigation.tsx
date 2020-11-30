@@ -1,6 +1,8 @@
-import { Button, ListItem, makeStyles, Theme } from "@material-ui/core";
-import React from "react";
-import { NavLink as RouterLink } from "react-router-dom";
+import {
+  Button, ListItem, makeStyles, Theme,
+} from '@material-ui/core';
+import React from 'react';
+import { NavLink as RouterLink } from 'react-router-dom';
 
 interface NavigationProps {
   href: string;
@@ -10,31 +12,31 @@ interface NavigationProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   item: {
-    display: "flex",
+    display: 'flex',
     paddingTop: 0,
     paddingBottom: 0,
   },
   button: {
     color: theme.palette.text.secondary,
     fontWeight: theme.typography.fontWeightMedium,
-    justifyContent: "flex-start",
+    justifyContent: 'flex-start',
     letterSpacing: 0,
-    padding: "10px 8px",
-    textTransform: "none",
-    width: "100%",
+    padding: '10px 8px',
+    textTransform: 'none',
+    width: '100%',
   },
   icon: {
     marginRight: theme.spacing(1),
   },
   title: {
-    marginRight: "auto",
+    marginRight: 'auto',
   },
   active: {
     color: theme.palette.primary.main,
-    "& $title": {
+    '& $title': {
       fontWeight: theme.typography.fontWeightMedium,
     },
-    "& $icon": {
+    '& $icon': {
       color: theme.palette.primary.main,
     },
   },
@@ -52,7 +54,7 @@ export const Navigation: React.FC<NavigationProps> = ({
         activeClassName={classes.active}
         className={classes.button}
         component={RouterLink}
-        exact={true}
+        exact
         to={href}
       >
         {Icon && <Icon className={classes.icon} size="20" />}

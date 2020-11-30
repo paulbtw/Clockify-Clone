@@ -1,4 +1,4 @@
-import { MembershipPermissions } from "./types/userRoles";
+import { MembershipPermissions } from './types/userRoles';
 import {
   ClientsView,
   DashboardView,
@@ -10,51 +10,51 @@ import {
   TeamsView,
   TrackerView,
   WorkspaceSettingsView,
-} from "./views";
+} from './views';
 
 export default [
   {
-    path: "/dashboard/tracker",
+    path: '/dashboard/tracker',
     exact: true,
     component: TrackerView,
   },
   {
-    path: "/dashboard/reports",
+    path: '/dashboard/reports',
     exact: true,
     component: ReportsView,
   },
   {
-    path: "/dashboard",
+    path: '/dashboard',
     exact: true,
     component: DashboardView,
   },
   {
-    path: "/dashboard/projects",
+    path: '/dashboard/projects',
     exact: true,
     component: ProjectsView,
   },
   {
-    path: "/dashboard/teams",
+    path: '/dashboard/teams',
     exact: true,
     component: TeamsView,
   },
   {
-    path: "/dashboard/profile",
+    path: '/dashboard/profile',
     exact: true,
     component: SettingsView,
   },
   {
-    path: "/dashboard/workspaces",
+    path: '/dashboard/workspaces',
     exact: true,
     component: ManageWorkspacesView,
   },
   {
-    path: "/dashboard/tags",
+    path: '/dashboard/tags',
     exact: true,
     component: TagsView,
   },
   {
-    path: "/dashboard/clients",
+    path: '/dashboard/clients',
     exact: true,
     component: ClientsView,
     roles: [
@@ -63,7 +63,7 @@ export default [
     ],
   },
   {
-    path: "/dashboard/settings",
+    path: '/dashboard/settings',
     exact: true,
     component: WorkspaceSettingsView,
     roles: [

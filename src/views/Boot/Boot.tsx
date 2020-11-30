@@ -1,13 +1,13 @@
-import { LinearProgress, Typography } from "@material-ui/core";
-import { get } from "lodash";
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { LinearProgress, Typography } from '@material-ui/core';
+import { get } from 'lodash';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import {
   defaultWorkspace,
   getAllWorkspaces,
   getUnreadNotifications,
-} from "../../actions/boot";
-import { Page } from "../../components";
+} from '../../actions/boot';
+import { Page } from '../../components';
 
 interface BootProps {
   defaultWorkspaceId: string;
@@ -32,7 +32,7 @@ const Boot: React.FC<BootProps> = ({
       .then(() => {
         getAllWorkspaces();
       });
-  }, []);
+  }, [defaultWorkspaceId, getAllWorkspaces, getDefaultWorkspace, getUnreadNotifications, userId]);
 
   return (
     <Page title="Booting">
@@ -42,21 +42,15 @@ const Boot: React.FC<BootProps> = ({
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {
-    defaultWorkspaceId: get(state, "auth.user.defaultWorkspace", null),
-    userId: get(state, "auth.user.id", null),
-  };
-};
+const mapStateToProps = (state: any) => ({
+  defaultWorkspaceId: get(state, 'auth.user.defaultWorkspace', null),
+  userId: get(state, 'auth.user.id', null),
+});
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    getDefaultWorkspace: (workspaceId: string) =>
-      dispatch(defaultWorkspace(workspaceId)),
-    getAllWorkspaces: () => dispatch(getAllWorkspaces()),
-    getUnreadNotifications: (userId: string) =>
-      dispatch(getUnreadNotifications(userId)),
-  };
-};
+const mapDispatchToProps = (dispatch: any) => ({
+  getDefaultWorkspace: (workspaceId: string) => dispatch(defaultWorkspace(workspaceId)),
+  getAllWorkspaces: () => dispatch(getAllWorkspaces()),
+  getUnreadNotifications: (userId: string) => dispatch(getUnreadNotifications(userId)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Boot);

@@ -1,9 +1,9 @@
-import * as types from "../constants/ActionTypes";
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
+import * as types from '../constants/ActionTypes';
 
 const requestPasswordReset = (
   state = {},
-  action: { type: string; status: string; isFetching?: boolean }
+  action: { type: string; status: string; isFetching?: boolean },
 ) => {
   switch (action.type) {
     case types.REQUEST_PASSWORD_RESET:
@@ -18,7 +18,7 @@ const requestPasswordReset = (
 
 const confirmPasswordReset = (
   state = {},
-  action: { type: string; status: string; isFetching?: boolean }
+  action: { type: string; status: string; isFetching?: boolean },
 ) => {
   switch (action.type) {
     case types.CONFIRM_PASSWORD_RESET:
@@ -33,7 +33,7 @@ const confirmPasswordReset = (
 
 const verifyPasswordResetCode = (
   state = {},
-  action: { type: string; status: string; isFetching?: boolean }
+  action: { type: string; status: string; isFetching?: boolean },
 ) => {
   switch (action.type) {
     case types.VERIFY_PASSWORD_RESET_CODE:

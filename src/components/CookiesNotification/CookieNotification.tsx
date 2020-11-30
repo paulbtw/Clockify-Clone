@@ -1,34 +1,36 @@
-import { Button, Link, makeStyles, Paper, Typography } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
-import Cookies from "js-cookie";
+import {
+  Button, Link, makeStyles, Paper, Typography,
+} from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 interface CookieNotificationProps {}
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 420,
-    position: "fixed",
+    position: 'fixed',
     bottom: 0,
     right: 0,
     margin: theme.spacing(3),
-    outline: "none",
+    outline: 'none',
     zIndex: 2000,
   },
   media: {
     padding: theme.spacing(1, 2),
     height: 180,
-    textAlign: "center",
-    "& > img": {
-      height: "100%",
-      width: "auto",
+    textAlign: 'center',
+    '& > img': {
+      height: '100%',
+      width: 'auto',
     },
   },
   content: {
     padding: theme.spacing(1, 2),
   },
   actions: {
-    display: "flex",
-    justifyContent: "flex-end",
+    display: 'flex',
+    justifyContent: 'flex-end',
     padding: theme.spacing(1, 2, 2, 1),
   },
 }));
@@ -39,7 +41,7 @@ const CookieNotification: React.FC<CookieNotificationProps> = ({}) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const consent = Cookies.get("consent");
+    const consent = Cookies.get('consent');
 
     if (!consent) {
       setOpen(true);
@@ -47,7 +49,7 @@ const CookieNotification: React.FC<CookieNotificationProps> = ({}) => {
   }, []);
 
   const handleClose = () => {
-    Cookies.set("consent", "true");
+    Cookies.set('consent', 'true');
     setOpen(false);
   };
 
@@ -62,7 +64,8 @@ const CookieNotification: React.FC<CookieNotificationProps> = ({}) => {
       <div className={classes.content}>
         <Typography variant="body1">
           We use Cookies to ensure that we give you the best experience on our
-          website. Read our{" "}
+          website. Read our
+          {' '}
           <Link
             component="a"
             href="#"

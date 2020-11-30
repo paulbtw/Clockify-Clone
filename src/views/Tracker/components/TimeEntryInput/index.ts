@@ -1,1 +1,1 @@
-export { default } from "./TimeEntryInput";
+export { default } from './TimeEntryInput';

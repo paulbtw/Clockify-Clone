@@ -1,1 +1,1 @@
-export { default } from "./AccountPopover";
+export { default } from './AccountPopover';
