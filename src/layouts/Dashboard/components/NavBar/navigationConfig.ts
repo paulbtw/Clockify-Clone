@@ -8,44 +8,44 @@ import MoodIcon from '@material-ui/icons/Mood';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 
 export default [
-  {
-    href: '/dashboard/tracker',
-    icon: ScheduleIcon,
-    title: 'Timer',
-  },
-  {
-    href: '/dashboard/reports',
-    icon: BarChartIcon,
-    title: 'Reports',
-  },
-  {
-    href: '/dashboard',
-    icon: BorderAllIcon,
-    title: 'Dashboard',
-  },
-  {
-    href: '/dashboard/projects',
-    icon: LibraryBooksIcon,
-    title: 'Projects',
-  },
-  {
-    href: '/dashboard/teams',
-    icon: GroupIcon,
-    title: 'Teams',
-  },
-  {
-    href: '/dashboard/clients',
-    icon: MoodIcon,
-    title: 'Clients',
-  },
-  {
-    href: '/dashboard/tags',
-    icon: TurnedInNotIcon,
-    title: 'Tags',
-  },
-  {
-    href: '/dashboard/settings',
-    icon: SettingsIcon,
-    title: 'Settings',
-  },
+	{
+		href: '/dashboard/tracker',
+		icon: ScheduleIcon,
+		title: 'Timer',
+	},
+	{
+		href: '/dashboard/reports',
+		icon: BarChartIcon,
+		title: 'Reports',
+	},
+	{
+		href: '/dashboard',
+		icon: BorderAllIcon,
+		title: 'Dashboard',
+	},
+	{
+		href: '/dashboard/projects',
+		icon: LibraryBooksIcon,
+		title: 'Projects',
+	},
+	{
+		href: '/dashboard/teams',
+		icon: GroupIcon,
+		title: 'Teams',
+	},
+	{
+		href: '/dashboard/clients',
+		icon: MoodIcon,
+		title: 'Clients',
+	},
+	{
+		href: '/dashboard/tags',
+		icon: TurnedInNotIcon,
+		title: 'Tags',
+	},
+	{
+		href: '/dashboard/settings',
+		icon: SettingsIcon,
+		title: 'Settings',
+	},
 ];

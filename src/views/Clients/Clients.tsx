@@ -5,9 +5,9 @@ import { Page } from '../../components';
 interface ClientsProps {}
 
 const Clients: React.FC<ClientsProps> = ({}) => (
-  <Page title="Clients">
-    <Typography>Clients</Typography>
-  </Page>
+	<Page title='Clients'>
+		<Typography>Clients</Typography>
+	</Page>
 );
 
 export default Clients;

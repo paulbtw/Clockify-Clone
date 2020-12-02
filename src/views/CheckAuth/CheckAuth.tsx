@@ -7,28 +7,28 @@ import { Page } from '../../components';
 import { requestApi } from '../../utils/api';
 
 interface CheckAuthProps {
-  userLoggedIn: boolean | null;
-  isLoggedIn: () => void;
+	userLoggedIn: boolean | null;
+	isLoggedIn: () => void;
 }
 
 const CheckAuth: React.FC<CheckAuthProps> = ({ userLoggedIn, isLoggedIn }) => {
-  useEffect(() => {
-    isLoggedIn();
-  }, [isLoggedIn]);
-  return (
-    <Page title="Authenticating">
-      <Typography variant="h1">Checking Authentication Status</Typography>
-      <LinearProgress variant="indeterminate" />
-    </Page>
-  );
+	useEffect(() => {
+		isLoggedIn();
+	}, [isLoggedIn]);
+	return (
+		<Page title='Authenticating'>
+			<Typography variant='h1'>Checking Authentication Status</Typography>
+			<LinearProgress variant='indeterminate' />
+		</Page>
+	);
 };
 
 const mapStateToProps = (state: any) => ({
-  userLoggedIn: get(state, 'auth.userLoggedIn', null),
+	userLoggedIn: get(state, 'auth.userLoggedIn', null),
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  isLoggedIn: () => dispatch(isLoggedIn()),
+	isLoggedIn: () => dispatch(isLoggedIn()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckAuth);

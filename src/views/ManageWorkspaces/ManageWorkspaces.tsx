@@ -5,9 +5,9 @@ import { Page } from '../../components';
 interface ManageWorkspacesProps {}
 
 const ManageWorkspaces: React.FC<ManageWorkspacesProps> = ({}) => (
-  <Page title="Manage your Workspaces">
-    <Typography>Manage your workspaces</Typography>
-  </Page>
+	<Page title='Manage your Workspaces'>
+		<Typography>Manage your workspaces</Typography>
+	</Page>
 );
 
 export default ManageWorkspaces;

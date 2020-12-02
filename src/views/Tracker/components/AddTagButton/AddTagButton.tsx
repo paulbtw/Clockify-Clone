@@ -4,13 +4,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 interface AddTagButtonProps {
-  workspaceId: string;
+	workspaceId: string;
 }
 
-const AddTagButton: React.FC<AddTagButtonProps> = ({ workspaceId }) => <Button>New Tag</Button>;
+const AddTagButton: React.FC<AddTagButtonProps> = ({ workspaceId }) => (
+	<Button>New Tag</Button>
+);
 
 const mapStateToProps = (state: any) => ({
-  workspaceId: get(state, 'auth.user.activeWorkspace', null),
+	workspaceId: get(state, 'auth.user.activeWorkspace', null),
 });
 
 export default connect(mapStateToProps)(AddTagButton);

@@ -5,9 +5,9 @@ import { Page } from '../../components';
 interface ReportsProps {}
 
 const Reports: React.FC<ReportsProps> = ({}) => (
-  <Page title="Reports">
-    <Typography>Reports</Typography>
-  </Page>
+	<Page title='Reports'>
+		<Typography>Reports</Typography>
+	</Page>
 );
 
 export default Reports;

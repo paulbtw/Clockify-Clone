@@ -10,10 +10,10 @@ const orange = buildGradient(colors.orange[400], colors.orange[700]);
 const red = buildGradient(colors.red[500], colors.red[700]);
 
 export default {
-  grey,
-  blue,
-  indigo,
-  green,
-  orange,
-  red,
+	grey,
+	blue,
+	indigo,
+	green,
+	orange,
+	red,
 };
