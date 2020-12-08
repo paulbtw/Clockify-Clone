@@ -20,5 +20,13 @@ export interface IWorkspace {
 	};
 	featureSubscriptionType: null;
 	onSubdomain: boolean;
-	members: any[];
+	members: {
+		id: string;
+		membershipStatus: string;
+		membershipType: string;
+		hourlyRate: { amount: number; currency: string };
+		permissions: string;
+		usersId: string;
+		workspaceId: string;
+	}[];
 }

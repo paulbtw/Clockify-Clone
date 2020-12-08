@@ -2,10 +2,10 @@ import { Button, makeStyles, TextField, Theme } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import validate from 'validate.js';
-import { toast } from 'react-toastify';
 import { connect, useSelector } from 'react-redux';
 import { requestApi } from '../../../../utils/api';
 import { requestPasswordReset } from '../../../../actions/resetPassword';
+import { useSnackbar } from 'notistack';
 
 interface ForgotPasswordFormProps {
 	className: string;
@@ -41,6 +41,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
 	onForgotPassword,
 }) => {
 	const classes = useStyles();
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
 	const [formState, setFormState] = useState({
 		isValid: false,
@@ -98,7 +99,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
 
 	// Error messages
 	useEffect(() => {
-		toast.error(errorMesssage);
+		enqueueSnackbar(errorMesssage, { variant: 'warning' });
 	}, [errorMesssage]);
 
 	const message = useSelector(
@@ -106,7 +107,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
 	);
 
 	useEffect(() => {
-		toast.success(message);
+		enqueueSnackbar(message, { variant: 'success' });
 	}, [message]);
 
 	return (

@@ -2,11 +2,8 @@ import { LinearProgress, Typography } from '@material-ui/core';
 import { get } from 'lodash';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import {
-	defaultWorkspace,
-	getAllWorkspaces,
-	getUnreadNotifications,
-} from '../../actions/boot';
+import { getUnreadNotifications } from '../../actions/notifications';
+import { defaultWorkspace, getAllWorkspaces } from '../../actions/workspace';
 import { Page } from '../../components';
 
 interface BootProps {

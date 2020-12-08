@@ -150,9 +150,9 @@ const TopBar: React.FC<TopBarProps> = ({
 };
 
 const mapStateToProps = (state: any) => ({
-	defaultWorkspace: get(state, 'boot.defaultWorkspace.defaultWorkspace', null),
-	workspaces: get(state, 'boot.workspaces.workspaces', []),
-	notifications: get(state, 'boot.notifications.notifications', []),
+	defaultWorkspace: get(state, 'defaultWorkspace.defaultWorkspace', null),
+	workspaces: get(state, 'workspaces.workspaces', []),
+	notifications: get(state, 'notifications.notifications', []),
 });
 
 export default connect(mapStateToProps, null)(TopBar);

@@ -11,11 +11,12 @@ import {
 	DialogContent,
 	DialogActions,
 } from '@material-ui/core';
-import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import { requestApi } from '../../../../utils/api';
+import { useSnackbar } from 'notistack';
 
 const Delete: React.FC = () => {
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 	const [open, setOpen] = useState(false);
 
 	const handleClickOpen = () => {
@@ -31,13 +32,13 @@ const Delete: React.FC = () => {
 			const response = await requestApi('/auth/delete', 'DELETE');
 
 			if (response.success) {
-				toast.success(response.message);
+				enqueueSnackbar(response.message, { variant: 'success' });
 				localStorage.removeItem('token');
 				history.push('/');
 			}
 		} catch (err) {
 			console.log(err.message);
-			toast.error('Failed to delete');
+			enqueueSnackbar('Failed to delete', { variant: 'error' });
 		}
 	};
 

@@ -2,14 +2,18 @@ import { combineReducers } from 'redux';
 import auth from './auth';
 import resetPassword from './resetPassword';
 import timeEntries from './timeEntries';
-import boot from './boot';
+import defaultWorkspace from './defaultWorkspace';
+import workspaces from './workspaces';
+import notifications from './notifications';
 import * as types from '../constants/ActionTypes';
 
 const appReducer = combineReducers({
 	auth,
 	resetPassword,
 	timeEntries,
-	boot,
+	defaultWorkspace,
+	workspaces,
+	notifications,
 });
 
 const rootReducer = (state: any, action: any) => {

@@ -139,9 +139,9 @@ const Routes: React.FC<RoutesProps> = ({
 
 const mapStateToProps = (state: any) => ({
 	userLoggedIn: get(state, 'auth.userLoggedIn', null),
-	defaultWorkspace: get(state, 'boot.defaultWorkspace.defaultWorkspace', null),
-	workspaces: get(state, 'boot.workspaces.workspaces', null),
-	notificationsArray: get(state, 'boot.notifications.notificationsArray', null),
+	defaultWorkspace: get(state, 'defaultWorkspace.defaultWorkspace', null),
+	workspaces: get(state, 'workspaces.workspaces', null),
+	notificationsArray: get(state, 'notifications.notificationsArray', null),
 });
 
 export default connect(mapStateToProps)(Routes);

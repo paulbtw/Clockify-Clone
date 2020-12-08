@@ -1,10 +1,10 @@
 import { Button, makeStyles, TextField, Theme } from '@material-ui/core';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import validate from 'validate.js';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
-import { toast } from 'react-toastify';
 import { login } from '../../../../actions/login';
+import { useSnackbar } from 'notistack';
 
 interface LoginFormProps {
 	className: string;
@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const LoginForm: React.FC<LoginFormProps> = ({ className, onLogin }) => {
 	const classes = useStyles();
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
 	const [formState, setFormState] = useState({
 		isValid: false,
@@ -90,11 +91,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, onLogin }) => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		onLogin(formState.values.email, formState.values.password)
-			.then((response) => {
-				toast.success('Logged In');
+			.then(() => {
+				enqueueSnackbar('Logged In', { variant: 'success' });
+				window.gtag('event', 'login', { method: 'Local' });
 			})
 			.catch((err) => {
-				toast.error(err.message);
+				enqueueSnackbar(err.message, { variant: 'error' });
 			});
 	};
 

@@ -1,10 +1,10 @@
 import { Button, makeStyles, TextField, Theme } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { toast } from 'react-toastify';
 import validate from 'validate.js';
 import { useHistory } from 'react-router-dom';
 import { requestApi } from '../../../../utils/api';
+import { useSnackbar } from 'notistack';
 
 interface ResetPasswordFormProps {
 	className: string;
@@ -51,6 +51,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 }) => {
 	const classes = useStyles();
 	const history = useHistory();
+	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
 	const [formState, setFormState] = useState({
 		isValid: false,
@@ -108,27 +109,21 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({
 			const response = await requestApi(`/auth/reset/${token}`, 'PUT', body);
 
 			if (response.success) {
-				toast.success(response.message);
+				enqueueSnackbar(response.message, { variant: 'success' });
 				history.push('/login');
 			}
 		} catch (err) {
 			console.log(err.message);
-			toast.error('Password change failed');
+			enqueueSnackbar('Password change failed', { variant: 'error' });
 		}
 	};
 
 	useEffect(() => {
 		const testToken = async () => {
 			try {
-				const response = await requestApi(`/auth/reset/${token}`, 'GET');
-
-				if (!response.success) {
-					toast.error(response.message);
-					console.log('history push');
-					history.push('/reset');
-				}
+				await requestApi(`/auth/reset/${token}`, 'GET');
 			} catch (err) {
-				toast.error(err.message);
+				enqueueSnackbar(err.message, { variant: 'error' });
 				history.push('/reset');
 			}
 		};

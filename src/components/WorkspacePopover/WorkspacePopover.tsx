@@ -60,7 +60,7 @@ const WorkspacePopover: React.FC<WorkspacePopoverProps> = ({
 		}
 		changeDefaultWorkspace(workspaceId, userId)
 			.then(() => {
-				window.location.reload(false);
+				window.location.reload();
 			})
 			.catch(console.log);
 	};
